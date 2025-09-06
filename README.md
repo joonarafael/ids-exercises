@@ -1,4 +1,4 @@
-# EXCERSISES
+# Introduction to Data Science - Exercise Submissions
 
 Repository for the exercises of the Introduction to Data Science course at the University of Helsinki.
 
