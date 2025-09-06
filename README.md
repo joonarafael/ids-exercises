@@ -33,3 +33,7 @@ To deactivate the virtual environment, run the following command:
 ```bash
 deactivate
 ```
+
+## Data
+
+Create always a new folder for the data files (use directory name `data`). This way it won't get committed to the repository.
