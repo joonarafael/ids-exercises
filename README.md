@@ -37,3 +37,21 @@ deactivate
 ## Data
 
 Create always a new folder for the data files (use directory name `data`). This way it won't get committed to the repository.
+
+## SQLite Stuff
+
+Pull a lightweight SQLite image from Docker Hub:
+
+```bash
+docker pull nouchka/sqlite3
+```
+
+Run the container with dump (.sqlite file) mounted to the container:
+
+```bash
+docker run -it --rm \
+  -v $(pwd)/data:/db \
+  nouchka/sqlite3 /db/dump.sqlite
+```
+
+Adjust the paths to mount the correct folder on your host machine and the name of the dump file. The example command should be executed under a given week folder, e.g. `week1`. The sqlite file should be placed under the `data` folder and named `dump.sqlite`.

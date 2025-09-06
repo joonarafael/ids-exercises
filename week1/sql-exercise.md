@@ -1,0 +1,197 @@
+# Week 1 SQL Exercise
+
+1. List the first name, last name, and hire date of all employees hired after January 1st, 1994.
+
+```bash
+sqlite> SELECT FirstName,LastName,HireDate FROM employees WHERE HireDate >= '1994-01-01';
+
+Robert|King|1994-01-02
+Laura|Callahan|1994-03-05
+Anne|Dodsworth|1994-11-15
+```
+
+2. Count how many orders each customer has placed.
+
+```bash
+sqlite> SELECT CustomerID, COUNT(*) as OrderCount
+FROM Orders
+GROUP BY CustomerID
+ORDER BY OrderCount DESC;
+
+SAVEA|31
+ERNSH|30
+QUICK|28
+HUNGO|19
+FOLKO|19
+RATTC|18
+HILAA|18
+BERGS|18
+BONAP|17
+WARTH|15
+LEHMS|15
+FRANK|15
+WHITC|14
+LILAS|14
+LAMAI|14
+KOENE|14
+HANAR|14
+BOTTM|14
+QUEEN|13
+MEREP|13
+AROUT|13
+SUPRD|12
+REGGC|12
+LINOD|12
+VAFFE|11
+RICAR|11
+GREAL|11
+BLONP|11
+WANDK|10
+VICTE|10
+TORTU|10
+RICSU|10
+PICCO|10
+OTTIK|10
+OLDWO|10
+MAGAA|10
+ISLAT|10
+GODOS|10
+BSBEV|10
+WELLI|9
+SPLIR|9
+SEVES|9
+QUEDE|9
+GOURL|9
+LONEP|8
+FURIB|8
+EASTC|8
+CHOPS|8
+WOLZA|7
+WILMK|7
+SIMOB|7
+MAISD|7
+FAMIA|7
+BLAUS|7
+ANTON|7
+TRADH|6
+TOMSP|6
+SANTG|6
+PERIC|6
+FRANS|6
+DRACD|6
+CACTU|6
+ALFKI|6
+VINET|5
+ROMEY|5
+RANCH|5
+PRINI|5
+OCEAN|5
+MORGK|5
+HUNGC|5
+GALED|5
+FOLIG|5
+COMMI|5
+THEBI|4
+SPECD|4
+LETSS|4
+LACOR|4
+DUMON|4
+ANATR|4
+TRAIH|3
+THECR|3
+NORTS|3
+LAUGB|3
+FRANR|3
+CONSH|3
+BOLID|3
+LAZYK|2
+GROSR|2
+CENTC|1
+```
+
+3. Find the names of all customers who have ordered the product "Chai".
+
+```bash
+sqlite> SELECT DISTINCT c.CustomerID, c.ContactName
+FROM Customers c
+JOIN Orders o ON c.CustomerID = o.CustomerID
+JOIN OrderDetails od ON o.OrderID = od.OrderID
+JOIN Products p ON od.ProductID = p.ProductID
+WHERE p.ProductName = 'Chai'
+ORDER BY c.CompanyName;
+
+BERGS|Christina Berglund
+BLONP|Frédérique Citeaux
+BOTTM|Elizabeth Lincoln
+CHOPS|Yang Wang
+WANDK|Rita Müller
+DUMON|Janine Labrune
+EASTC|Ann Devon
+GODOS|José Pedro Freyre
+GREAL|Howard Snyder
+HILAA|Carlos Hernández
+HUNGO|Patricia McKenna
+LINOD|Felipe Izquierdo
+LAMAI|Annette Roulet
+LEHMS|Renate Messner
+LONEP|Fran Wilson
+MEREP|Jean Fresnière
+NORTS|Simon Crowther
+PERIC|Guillermo Fernández
+PRINI|Isabel de Castro
+QUICK|Horst Kloss
+QUEEN|Lúcia Carvalho
+RATTC|Paula Wilson
+SAVEA|Jose Pavarotti
+SEVES|Hari Kumar
+SUPRD|Pascale Cartrain
+THECR|Liu Wong
+TORTU|Miguel Angel Paolino
+WARTH|Pirkko Koskitalo
+WELLI|Paula Parente
+WILMK|Matti Karttunen
+WOLZA|Zbyszek Piestrzeniewicz
+```
+
+4. Find all orders that have been placed but not yet shipped.
+
+```bash
+sqlite> SELECT OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate
+FROM Orders
+WHERE ShippedDate IS NULL;
+
+11008|ERNSH|7|1998-04-08 00:00:00.000|1998-05-06 00:00:00.000
+11019|RANCH|6|1998-04-13 00:00:00.000|1998-05-11 00:00:00.000
+11039|LINOD|1|1998-04-21 00:00:00.000|1998-05-19 00:00:00.000
+11040|GREAL|4|1998-04-22 00:00:00.000|1998-05-20 00:00:00.000
+11045|BOTTM|6|1998-04-23 00:00:00.000|1998-05-21 00:00:00.000
+11051|LAMAI|7|1998-04-27 00:00:00.000|1998-05-25 00:00:00.000
+11054|CACTU|8|1998-04-28 00:00:00.000|1998-05-26 00:00:00.000
+11058|BLAUS|9|1998-04-29 00:00:00.000|1998-05-27 00:00:00.000
+11059|RICAR|2|1998-04-29 00:00:00.000|1998-06-10 00:00:00.000
+11061|GREAL|4|1998-04-30 00:00:00.000|1998-06-11 00:00:00.000
+11062|REGGC|4|1998-04-30 00:00:00.000|1998-05-28 00:00:00.000
+11065|LILAS|8|1998-05-01 00:00:00.000|1998-05-29 00:00:00.000
+11068|QUEEN|8|1998-05-04 00:00:00.000|1998-06-01 00:00:00.000
+11070|LEHMS|2|1998-05-05 00:00:00.000|1998-06-02 00:00:00.000
+11071|LILAS|1|1998-05-05 00:00:00.000|1998-06-02 00:00:00.000
+11072|ERNSH|4|1998-05-05 00:00:00.000|1998-06-02 00:00:00.000
+11073|PERIC|2|1998-05-05 00:00:00.000|1998-06-02 00:00:00.000
+11074|SIMOB|7|1998-05-06 00:00:00.000|1998-06-03 00:00:00.000
+11075|RICSU|8|1998-05-06 00:00:00.000|1998-06-03 00:00:00.000
+11076|BONAP|4|1998-05-06 00:00:00.000|1998-06-03 00:00:00.000
+11077|RATTC|1|1998-05-06 00:00:00.000|1998-06-03 00:00:00.000
+```
+
+5. Find the customer who has placed the most orders.
+
+```bash
+sqlite> SELECT c.CustomerID, c.CompanyName, COUNT(*) as OrderCount
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+GROUP BY c.CustomerID, c.CompanyName
+ORDER BY OrderCount DESC
+LIMIT 1;
+
+SAVEA|Save-a-lot Markets|31
+```
