@@ -37,7 +37,7 @@ def create_distribution_plots(df: DataFrame) -> plt.Figure:
     axes[0, 1].set_ylabel('Frequency')
 
     axes[0, 1].legend()
-    axes[0, 1].set_xlim(0, 200)
+    axes[0, 1].set_xlim(0, 200) # add limits for better visualization
 
     # pclass
     
@@ -103,12 +103,12 @@ def create_distribution_plots(df: DataFrame) -> plt.Figure:
 
     box_data_age = [survivors['Age'], non_survivors['Age']]
     axes[2, 1].boxplot(box_data_age, labels=['Survivors', 'Non-survivors'])
-    axes[2, 1].set_title('Age Distribution (Box Plot)')
+    axes[2, 1].set_title('Age Distribution')
     axes[2, 1].set_ylabel('Age')
     
     box_data_fare = [survivors['Fare'], non_survivors['Fare']]
     axes[2, 2].boxplot(box_data_fare, labels=['Survivors', 'Non-survivors'])
-    axes[2, 2].set_title('Fare Distribution (Box Plot)')
+    axes[2, 2].set_title('Fare Distribution')
     axes[2, 2].set_ylabel('Fare')
     
     plt.tight_layout()
