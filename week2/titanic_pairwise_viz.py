@@ -14,8 +14,7 @@ def create_seaborn_pairplot(df: DataFrame) -> sns.axisgrid.PairGrid:
     
     df_plot = df[plot_vars + ['Survived']].copy()
     df_plot['Survival_Status'] = df_plot['Survived'].map({0: 'Non-survivor', 1: 'Survivor'})
-    
-    # Set custom colors: red for non-survivors, blue for survivors
+
     custom_colors = {'Non-survivor': 'red', 'Survivor': 'blue'}
     
     g = sns.pairplot(df_plot, 
